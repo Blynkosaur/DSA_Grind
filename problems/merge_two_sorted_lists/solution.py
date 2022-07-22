@@ -25,19 +25,16 @@ class Solution:
             if list1.val < list2.val:
                 tail.next= list1
                 list1 = list1.next
-                print("list1: ",list1)
-                print("first tail: ",tail)
+                
                 
             else:
                 tail.next = list2
                 list2 = list2.next
-                print("list2",list2)
-                print("first tail: ",tail)
+                
                 
             
             tail = tail.next
-            print("dummy: ",dummy)
-            print("tail: ",tail)
+            
             
         if list1:
             tail.next = list1
