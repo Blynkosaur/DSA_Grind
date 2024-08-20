@@ -1,26 +1,25 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        hashmap = {}
-        hashmap2 = {}
-        for el in s:
-            if el not in hashmap:
-                hashmap[el]= 0
-            hashmap[el] +=1
-        for i in t:
-            if i not in hashmap2:
-                hashmap2[i]=0
-            hashmap2[i] += 1
-        for i in hashmap2:
-            if i not in hashmap:
-                return False
-            elif hashmap2[i] != hashmap[i]:
-                return False
-        for i in hashmap:
-            if i not in hashmap2:
-                return False
-            elif hashmap[i] != hashmap2[i]:
-                return False
+        s_ls = []
+        t_ls = []
+        if len(s) != len(t):
+            return False
+        for i in range(len(s)):
+            
+
+            s_ls.append(s[i])
+            t_ls.append(t[i])
+            
+            
         
-        return True
-            
-            
+        s_s = sorted(s_ls)
+        t_s = sorted(t_ls)
+        print(s_s)
+        print(t_s)
+        if s_s == t_s:
+            return True
+        else:
+            return False
+
+
+        
