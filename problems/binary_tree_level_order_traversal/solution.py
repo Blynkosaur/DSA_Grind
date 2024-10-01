@@ -5,36 +5,22 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    def __init__(self):
+        self.output = []
+
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        q= deque()
-        q.append((root,0))
-        nodes = []
-        answer = []
-        
-        while len(q) != 0:
-            node = q.popleft()
-            value = node[0]
-            
-            level = node[1]
-            if value != None:
-                q.append((value.left,level+1))
-                q.append((value.right,level+1))
-                nodes.append((value.val,level))
-        print(nodes)
-        level = 0
-        new = []
-        for i in nodes:
-            if i[1] != level:
-                level += 1
-                answer.append(new)
-                new = []
-                new.append(i[0])
-            else:
-                new.append(i[0])
-        if new != []:
-            
-            answer.append(new)
-        return answer
-        
-                
-            
+        self.helper(root, 0)
+        return self.output
+
+
+    def helper(self, root, depth):
+        if not root:
+            return root
+
+        if depth > (len(self.output) - 1):
+            self.output.append([root.val])
+        else:
+            self.output[depth].append(root.val)
+
+        self.helper(root.left, depth + 1)
+        self.helper(root.right, depth + 1)
