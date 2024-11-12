@@ -6,20 +6,6 @@
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-#         hashmap = {}
-#         while True:
-            
-#             if head != None:
-                
-#                 if head not in hashmap:
-#                     hashmap[head]= 0
-#                 hashmap[head]+=1
-#                 if hashmap[head]>1:
-#                     return True
-#                 head = head.next
-#             else:
-                
-#                 return False
         turtle = head
         rabbit = head
         if head == None:
@@ -30,4 +16,3 @@ class Solution:
             if rabbit == turtle:
                 return True
         return False
-        
