@@ -1,5 +1,5 @@
 from collections import deque
-from future import typing
+from typing import List
 
 
 def numIslands(self, grid: List[List[str]]) -> int:
