@@ -3,8 +3,21 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        for i in range(len(nums)):
-            for j in range(len(nums)-1):
-                if nums[j] > nums[j+1]:
-                    nums[j],nums[j+1] = nums[j+1], nums[j]
+        counter = {}
+        for num in nums:
+            counter[num] = counter.get(num,0)+1
+        current = 0 
+        print(counter)
+        for i in (0,1,2):
+            if i not in counter.keys():
+                continue
+            for j in range(counter[i]):
+                nums[current+j] = i
+            current += counter[i]
+        
+
                 
+
+
+    
+        
