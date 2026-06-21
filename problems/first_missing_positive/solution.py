@@ -1,9 +1,11 @@
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
-        smallest = 1
-        heapify(nums)
-        while nums:
-            num = heappop(nums)
-            if num == smallest:
-                smallest += 1
-        return smallest
+        nextup = 1
+        nums = set(nums)
+        for n in range(1, max(nums)+1):
+            if n in nums:
+                nextup += 1
+            else:
+                return nextup
+        return nextup
+        
