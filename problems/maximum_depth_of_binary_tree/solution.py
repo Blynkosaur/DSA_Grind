@@ -5,19 +5,9 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def maxDepth(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
-        max_depth = 0
-        def checkDepth(root,depth):
-            nonlocal max_depth
-            if root:
-                depth += 1
-                max_depth = max(max_depth, depth)
-                checkDepth(root.left, depth)
-                checkDepth(root.right, depth)
-        checkDepth(root,0)
-        return max_depth
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        return 1 + max(self.maxDepth(root.right), self.maxDepth(root.left))
+        
         
