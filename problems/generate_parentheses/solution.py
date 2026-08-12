@@ -1,17 +1,16 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        stack = ['(']
-        answer = []
-        while stack:
-            el = stack.pop(0)
-            if len(el) == n*2:
-                answer.append(el)
-            else:
-                if el.count("(")< n:
-                    op = el + "("
-                    stack.append(op)
-                if el.count("(") > el.count(")"):
-                    cl = el + ")"
-                    stack.append(cl)
-        return answer
-            
+        output = []
+        
+        def backtrack(p, opened, curr):
+            if len(p) == n * 2:
+                output.append(p)
+                return
+            if opened < n:
+                backtrack(p + "(", opened + 1, curr + 1)
+            if curr > 0:
+                backtrack(p + ")", opened, curr - 1)
+        backtrack("", 0, 0)
+        return output
+        
+        
