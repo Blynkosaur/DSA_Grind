@@ -1,21 +1,19 @@
 class Solution:
     def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
-        times= []
-        two = list(zip(position,speed))
-        two = sorted(two)
-
-        for pos in range(len(position)):
-            time = (target -two[pos][0])/two[pos][1]
-            times.append(time)
-        head = times[-1]
-        fleets = 0
-        for i in range(len(times) - 1, -1, -1):
-            if times[i] > head:
-                head = times[i]
-                fleets += 1
-        fleets += 1
-        return fleets
-
-
-
+        times = [(position[i],(target- position[i])/speed[i]) for i in range(len(position))]
+        #speed = distance/time
+        times.sort(reverse = True)
+        count = 0
+        prev = None
+        for time in times:
+            if not prev:
+                count += 1
+                prev = time
+            else:
+                if time[1] > prev[1]:
+                    count+= 1
+                    prev = time
+        return count
             
+            
+

@@ -1,35 +1,28 @@
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        rows, cols = len(grid), len(grid[0])
+        max_area = 0
+        visited = set()
+        def bfs(r,c):
+            q = deque([(r,c)])
+            dirs = [(-1,0), (1,0), (0,-1), (0, 1)]
+            area = 0
+            nonlocal max_area
+            while q:
+                r,c = q.popleft()
+                visited.add((r,c))
+                area += 1
+                for dr, dc in dirs:
+                    if r + dr in range(rows) and c + dc in range(cols) and (r+dr, c + dc) not in visited and grid[r+dr][c + dc] == 1:
+                        visited.add((r+dr, c + dc))
+                        q.append((r+dr, c + dc))
+            max_area = max(max_area, area) 
+
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == 1 and (r,c) not in visited:
+                    bfs(r,c)
+        return max_area
+
         
-        maximum = 0
-
-        for row in range(len(grid)):
-            for column in range(len(grid[row])):
-                if grid[row][column] == 1:
-                    count = 0
-                    dfs = deque([[row,column]])
-                    while dfs:
-                        cord = dfs.pop()
-                        locrow = cord [0]
-                        loccol = cord [1]
-                        node = grid [locrow] [loccol]
-                        if node == 1:
-                            count += 1
-                            grid [locrow][loccol] = 0
-
-
-                        if locrow < len(grid)-1 :
-                            if grid [locrow+1][loccol] ==1:
-                                dfs.append([locrow+1,loccol])
-                        if locrow > 0 :
-                            if grid [locrow-1][loccol] ==1 :
-                                dfs.append([locrow-1,loccol])
-                        if loccol < len(grid[row])-1 :
-                            if grid [locrow][loccol+1] ==1:
-                                dfs.append([locrow,loccol+1])
-                        if loccol > 0 :
-                            if grid [locrow][loccol-1] ==1:
-                                dfs.append([locrow,loccol-1])
-                        
-                    maximum = max(maximum,count)
-        return maximum
+        

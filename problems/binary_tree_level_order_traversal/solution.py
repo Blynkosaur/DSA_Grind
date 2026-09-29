@@ -5,22 +5,17 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def __init__(self):
-        self.output = []
-
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        self.helper(root, 0)
-        return self.output
-
-
-    def helper(self, root, depth):
+        tree = defaultdict(list)
+        queue = deque([(root,0)])
         if not root:
-            return root
-
-        if depth > (len(self.output) - 1):
-            self.output.append([root.val])
-        else:
-            self.output[depth].append(root.val)
-
-        self.helper(root.left, depth + 1)
-        self.helper(root.right, depth + 1)
+            return []
+        while queue:
+            node, layer= queue.popleft()
+            tree[layer].append(node.val)
+            if node.left:
+                queue.append((node.left, layer + 1))
+            if node.right:
+                queue.append((node.right, layer + 1))
+        return [tree[layer] for layer in sorted(tree.keys())]
+        

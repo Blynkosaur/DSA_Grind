@@ -1,19 +1,22 @@
 class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
-        res = []
-        candidates.sort()
-        def helper(array,target,start):
-            if target == 0 and sorted(array) not in res:
-                res.append(sorted(array))
-            else:
-                previous = None
-                for i in range(start+1,len(candidates)):
-                    if candidates[i] != previous and target - candidates[i] >= 0:
-                        temp = array.copy()
-                        temp.append(candidates[i])
-                        helper(temp,target-candidates[i],i)
-                        previous = candidates[i]
-                        
-        helper([],target,-1)
-        return res
+        subs = []
+        counter = defaultdict(int) 
+        for c in candidates:
+            counter[c] += 1 
+        def backtrack(total, sub, previous):
+            if total > target:
+                return
+            if total == target:
+                subs.append(sub)
+                return
+            for c in counter:
+                if counter[c] > 0 and c >= previous:
+                    counter[c] -= 1
+                    backtrack(total + c, sub + [c], c)
+                    counter[c] += 1
+        backtrack(0, [], 0)
+        return subs 
+
             
+        

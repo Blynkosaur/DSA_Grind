@@ -1,10 +1,16 @@
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        hashmap = {}
-        for i in range(len(numbers)):
-            if numbers[i] not in hashmap:
-                hashmap[numbers[i]] = i
-            complement = target - numbers[i]
-            if complement in hashmap and hashmap[complement] != i:
-                return [hashmap[complement]+1,i+1]
-            
+        left = 0
+        right = len(numbers)-1
+        while left < right and numbers[left] + numbers[right] != target:
+            curr_sum = numbers[left] + numbers[right]
+            if curr_sum > target:
+                right -= 1
+            else:
+                left += 1 
+        return [left+1,right+1]
+
+
+
+        
+        
